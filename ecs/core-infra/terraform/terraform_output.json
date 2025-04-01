@@ -1,1 +1,112 @@
-{}
+{
+  "alb_endpoint": {
+    "sensitive": false,
+    "type": "string",
+    "value": "gitmoxidemo-1590752875.us-west-2.elb.amazonaws.com"
+  },
+  "allow_web_security_group_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string"
+      ]
+    ],
+    "value": [
+      "sg-0ec2e06f88d0e1466"
+    ]
+  },
+  "cloudwatch_log_group_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "/gitmoxidemo/ecs/nginx"
+  },
+  "cluster_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:ecs:us-west-2:381491902283:cluster/gitmoxidemo"
+  },
+  "cluster_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:ecs:us-west-2:381491902283:cluster/gitmoxidemo"
+  },
+  "cluster_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "gitmoxidemo"
+  },
+  "private_subnets": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-00db14ebe6747cd04",
+      "subnet-0dbbf8d2238b3fe78",
+      "subnet-0a6f4055a387cf080"
+    ]
+  },
+  "private_subnets_cidr_blocks": {
+    "sensitive": false,
+    "type": [
+      "list",
+      "string"
+    ],
+    "value": [
+      "10.0.10.0/24",
+      "10.0.11.0/24",
+      "10.0.12.0/24"
+    ]
+  },
+  "public_subnets": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0dc3950fe67573d71",
+      "subnet-060e1671a9f0dbb15",
+      "subnet-02117cfc441fab567"
+    ]
+  },
+  "region": {
+    "sensitive": false,
+    "type": "string",
+    "value": "us-west-2"
+  },
+  "target_group_arns": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "blue-tg": "string",
+        "green-tg": "string"
+      }
+    ],
+    "value": {
+      "blue-tg": "arn:aws:elasticloadbalancing:us-west-2:381491902283:targetgroup/blue-tg/f1064bdbd06c53aa",
+      "green-tg": "arn:aws:elasticloadbalancing:us-west-2:381491902283:targetgroup/green-tg/1f8fc347ad5e5d43"
+    }
+  },
+  "task_execution_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::381491902283:role/GitmoxiTaskExecutionRole"
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-016ef70ce55426535"
+  }
+}

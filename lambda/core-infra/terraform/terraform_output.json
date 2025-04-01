@@ -1,1 +1,57 @@
-{}
+{
+  "api_endpoint_with_route": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://m3cmaxk6m4.execute-api.us-east-1.amazonaws.com/test"
+  },
+  "api_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "m3cmaxk6m4"
+  },
+  "elb_endpoint": {
+    "sensitive": false,
+    "type": "string",
+    "value": "my-application-load-balancer-1155777712.us-east-1.elb.amazonaws.com"
+  },
+  "lambda_exec_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::381491902283:role/TestLambdaExecutionRole"
+  },
+  "route_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "mfguw3b"
+  },
+  "s3_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "lambda-function-deployment-bucket-fe03b24e"
+  },
+  "s3_object_blue_key": {
+    "sensitive": false,
+    "type": "string",
+    "value": "blue_function.zip"
+  },
+  "s3_object_green_key": {
+    "sensitive": false,
+    "type": "string",
+    "value": "green_function.zip"
+  },
+  "s3_object_sqs_key": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sqs_function.zip"
+  },
+  "sqs_queue_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:sqs:us-east-1:381491902283:example-queue"
+  },
+  "target_group_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:elasticloadbalancing:us-east-1:381491902283:targetgroup/my-target-group/a70fd80f224bd65d"
+  }
+}
