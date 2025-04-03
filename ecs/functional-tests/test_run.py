@@ -98,6 +98,7 @@ def main():
     for i in range(1):
         print(f"\n🚀 Starting test deployment {i + 1}...")
         deployment_type, commit_hash = trigger_deployment()
+        time.sleep(15)
         status = check_deployment_status(deployment_type, commit_hash)
 
         if status == "PROCESSED_SUCCESS":
