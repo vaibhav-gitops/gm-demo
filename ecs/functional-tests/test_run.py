@@ -66,7 +66,9 @@ def check_deployment_status(deployment_type, commit_hash):
         status_response = run_command(f"curl -s '{CHECK_STATUS_API}?commit_hash={commit_hash}'")
         if status_response:
             status_data = json.loads(status_response)
-            status = status_data.get("status")
+            print(status_data)
+            print("\n\n")
+            status = status_data[0].get("status")
             if status == "PROCESSED_SUCCESS":
                 print(f"✅ {deployment_type} deployment succeeded!")
                 return status
