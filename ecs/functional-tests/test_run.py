@@ -9,7 +9,7 @@ ROLLING_DIR = "ecs/rolling-update"
 BG_DIR = "ecs/blue-green-update"
 GIT_REPO = "https://github.com/vaibhav-gitops/gm-demo"
 GIT_BRANCH = "test_setup"
-CHECK_STATUS_API = "http://localhost:8080/api/v1/deployment/ecs"
+CHECK_STATUS_API = "http://localhost:8080/api/v1/deployments/ecs"
 MAX_WAIT_TIME = 300
 
 # Deployment counters
@@ -62,13 +62,14 @@ def check_deployment_status(deployment_type, commit_hash):
     """Poll the deployment status until it completes."""
     print(f"🔍 Checking {deployment_type} deployment status...")
     start_time = time.time()
+
     while time.time() - start_time < MAX_WAIT_TIME:
-        status_response = run_command(f"curl -s '{CHECK_STATUS_API}?commit_hash={commit_hash}'")
+        url = f"{CHECK_STATUS_API}?commit_hash={commit_hash}&n=1"
+        status_response = run_command(f"curl -s -X GET '{url}'")
+
         if status_response:
             status_data = json.loads(status_response)
-            print(status_data)
-            print("\n\n")
-            status = status_data[0].get("status")
+            status = status_data.get('deployments')[0].get("status")
             if status == "PROCESSED_SUCCESS":
                 print(f"✅ {deployment_type} deployment succeeded!")
                 return status
