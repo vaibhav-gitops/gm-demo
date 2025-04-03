@@ -36,7 +36,8 @@ def setup_infra():
 def create_push_commit(deployment_type):
     """Create and push a commit to trigger a deployment."""
     print("📌 Creating a new commit to trigger deployment...")
-    run_command(f"git add . && git commit -m 'Test {deployment_type}' && git push", cwd=PARENT_DIR)
+    run_command(f"git add . && git commit -m 'Test {deployment_type}' && "
+                f"git push --set-upstream origin {GIT_BRANCH}", cwd=PARENT_DIR)
     commit_hash = run_command("git rev-parse HEAD", cwd=PARENT_DIR)
     return commit_hash
 
