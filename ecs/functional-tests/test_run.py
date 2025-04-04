@@ -47,13 +47,13 @@ def add_gitmoxi_repo():
 
     if response:
         response_data = json.loads(response)
-        status = response_data.get("success")
-        if status == "true":
+        success = response_data.get("success")
+        if success:
             print(f"✅ Repository {GIT_REPO} added successfully!")
-            return status
+            return success
         else:
-            print(f"❌ Failed to add repository {GIT_REPO}. Status: {status}")
-            return status
+            print(f"❌ Failed to add repository {GIT_REPO}. Status: {success}")
+            return success
     else:
         print(f"⚠️ No response from server while adding repository {GIT_REPO}.")
         return "error"
@@ -165,7 +165,7 @@ def check_deployment_status(deployment_type, commit_hash):
 
 def cleanup():
     """Delete resources and run Terraform destroy."""
-    print("🧹 Cleaning up resources and destroying infrastructure...")
+    print("\n🧹 Cleaning up resources and destroying infrastructure...")
     run_command("aws ecs delete-service --cluster gitmoxidemo --service rolling-nginx-svc --region us-west-2 --force",
                 cwd=PARENT_DIR)
     run_command("aws ecs delete-service --cluster gitmoxidemo --service bg-nginx-svc --region us-west-2 --force",
