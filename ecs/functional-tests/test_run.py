@@ -1,7 +1,6 @@
 import subprocess
 import time
 import json
-import requests
 
 # Configuration
 PARENT_DIR = "."
@@ -48,8 +47,8 @@ def add_gitmoxi_repo():
 
     if response:
         response_data = json.loads(response)
-        status = response_data.get("status")
-        if status == "success":
+        status = response_data.get("success")
+        if status == "true":
             print(f"✅ Repository {GIT_REPO} added successfully!")
             return status
         else:
@@ -70,7 +69,7 @@ def create_push_commit(deployment_type):
 
 
 def trigger_rolling():
-    print("📌 Triggering rolling deployment...")
+    print("\n📌 Triggering rolling deployment...")
     run_command(f"cp nginx_taskdef.json.sample nginx_taskdef.json && "
                 f"cp nginx_svcdef.json.sample nginx_svcdef.json && "
                 f"cp nginx_depdef.json.sample nginx_depdef.json && "
@@ -81,8 +80,8 @@ def trigger_rolling():
 
 
 def trigger_rolling_update():
-    print("📌 Triggering rolling update deployment...")
-    run_command(f"sed -i '' 's/\"public.ecr.aws\/nginx\/nginx:latest\"/\"public.ecr.aws\/docker\/library\/httpd:alpine3.20\"/' nginx_input.json",
+    print("\n📌 Triggering rolling update deployment...")
+    run_command("sed -i '' 's|\"public.ecr.aws/nginx/nginx:latest\"|\"public.ecr.aws/docker/library/httpd:alpine3.20\"|' nginx_input.json",
                 cwd=ROLLING_DIR)
     commit_hash = create_push_commit("rolling update")
     run_command(f"gmctl commit deploy -r {GIT_REPO} -b {GIT_BRANCH}", cwd=PARENT_DIR)
@@ -90,7 +89,7 @@ def trigger_rolling_update():
 
 
 def trigger_blue_green():
-    print("📌 Triggering blue-green deployment...")
+    print("\n📌 Triggering blue-green deployment...")
     run_command(f"cp bg_nginx_taskdef.json.sample bg_nginx_taskdef.json && "
                 f"cp bg_nginx_svcdef.json.sample bg_nginx_svcdef.json && "
                 f"cp bg_nginx_depdef.json.sample bg_nginx_depdef.json && "
@@ -101,9 +100,9 @@ def trigger_blue_green():
 
 
 def trigger_blue_green_update():
-    print("📌 Triggering blue-green update deployment...")
-    run_command(f"sed -i '' 's/\"public.ecr.aws\/nginx\/nginx:latest\"/\"public.ecr.aws\/docker\/library\/httpd:alpine3.20\"/' bg_nginx_input.json"
-                , cwd=BG_DIR)
+    print("\n📌 Triggering blue-green update deployment...")
+    run_command("sed -i '' 's|\"public.ecr.aws/nginx/nginx:latest\"|\"public.ecr.aws/docker/library/httpd:alpine3.20\"|' bg_nginx_input.json",
+                cwd=BG_DIR)
     commit_hash = create_push_commit("blue-green update")
     run_command(f"gmctl commit deploy -r {GIT_REPO} -b {GIT_BRANCH}", cwd=PARENT_DIR)
     return "blue-green update", commit_hash
@@ -175,7 +174,7 @@ def cleanup():
 
 
 def main():
-    global GIT_BRANCH  # Modifies the global variable
+    global GIT_BRANCH
     if not setup_infra():
         print("❌ Failed to set up infrastructure. Exiting.")
         return
